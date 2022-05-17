@@ -4,6 +4,7 @@ const readline = require('readline');
 const { stdin: input, stdout: output } = require('process');
 const axios = require('axios');
 const file = require('./source/dirty.json');
+const typografText = require('./typograf');
 
 const rl = readline.createInterface({ input, output });
 
@@ -30,9 +31,10 @@ rl.question("Source Language? (default: 'en')", (lang) => {
                 "Authorization": `Bearer ${key}`
             }
         })
-            .then(res => {
+            .then(async (res) => {
+                const newArray = await typografText(res.data.translations.map(translation => translation.text));
                 Object.keys(file).map((key, index) => {
-                    newTranslation[key] = res.data.translations[index].text.replace('', "");
+                    newTranslation[key] = newArray[index];
                 })
                 console.log(newTranslation);
                 fs.writeFileSync('source/result.json', JSON.stringify(newTranslation), 'utf-8');
