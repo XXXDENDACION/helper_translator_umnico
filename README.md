@@ -47,7 +47,7 @@ Open `/source/result.json` after the script completes.
 
 Done! The result can be copied and pasted into the project.
 
-##Development Plan
+## Development Plan
 
 1. Add target and source language selection from the command.
 2. The ability to selectively enable and disable the typografy.
