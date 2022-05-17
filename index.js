@@ -3,7 +3,7 @@ require('dotenv').config();
 const readline = require('readline');
 const { stdin: input, stdout: output } = require('process');
 const axios = require('axios');
-const file = require('./dirty.json');
+const file = require('./source/dirty.json');
 
 const rl = readline.createInterface({ input, output });
 
@@ -35,7 +35,7 @@ rl.question("Source Language? (default: 'en')", (lang) => {
                     newTranslation[key] = res.data.translations[index].text.replace('', "");
                 })
                 console.log(newTranslation);
-                fs.writeFileSync('result.json', JSON.stringify(newTranslation), 'utf-8');
+                fs.writeFileSync('source/result.json', JSON.stringify(newTranslation), 'utf-8');
             })
             .catch(err => console.log(err.response));
 
