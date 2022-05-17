@@ -51,4 +51,4 @@ Done! The result can be copied and pasted into the project.
 
 1. Add target and source language selection from the command.
 2. The ability to selectively enable and disable the typografy.
-3. The ability to run a printing house separately (It can be useful for processing a large array of text without translation).
+3. The ability to run a typografy separately (It can be useful for processing a large array of text without translation).
