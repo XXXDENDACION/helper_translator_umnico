@@ -21,6 +21,8 @@ TOKEN=***your token***
 FOLDER=***your folder id***
 ```
 
+Add the desired languages to the TARGET_LANGUAGES array in `/src/constants.js`.
+
 ## Run
 Put it in `/source/dirty.json` JSON object with localization keys.
 
@@ -41,12 +43,17 @@ Example:
 
 Run `npm run start` in the repo and wait for the script to work.
 
-In the console, select source and target languages.
+In the console, select source languages.
 
-Open `/source/result.json` after the script completes.
+Open `/result` folder after the script completes.
 
 Done! The result can be copied and pasted into the project.
 
+## Attention!!
+
+Since puppeteer is used for the typografy, the more keys are used, the longer the execution of the program.
+
+But it's still faster than doing it manually. :blush:
 ## Development Plan
 
 1. Add target and source language selection from the command.
