@@ -1,8 +1,18 @@
 const puppeteer = require('puppeteer');
 
+/**
+ *
+ * @param {Array.<{language: Array.<string>}>} arrayText
+ * example: [
+ *  { ru: ['text', 'text] }
+ *  { en: ['text'] }
+ * ]
+ * @returns {Promise<*[]>}
+ */
+
 const typografText = async (arrayText) => {
     const typografyTextArray = [];
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const context = browser.defaultBrowserContext();
     await context.overridePermissions('https://www.artlebedev.ru/typograf/',['clipboard-read']);
     const page = await browser.newPage();
@@ -49,9 +59,16 @@ const typografText = async (arrayText) => {
     }
 
     for (let i = 0; i < arrayText.length; i++) {
-        const updatedText = await tranform(arrayText[i]);
-        const replaceText = updatedText.replaceAll('&nbsp;',' ');
-        typografyTextArray.push(replaceText);
+        const allUpdatedText = [];
+        const currentLanguage = Object.keys(arrayText[i])[0];
+        const textsOfCurrentLanguage = Object.values(arrayText[i])[0];
+        for (let j = 0; j < textsOfCurrentLanguage.length; j++) {
+            const updatedText = await tranform(textsOfCurrentLanguage[j]);
+            const replaceText = updatedText.replaceAll('&nbsp;',' ');
+            allUpdatedText.push(replaceText);
+        }
+        const newObject = {[currentLanguage]: allUpdatedText};
+        typografyTextArray.push(newObject);
     }
 
     await browser.close();
