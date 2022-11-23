@@ -6,11 +6,11 @@ const { stdin: input, stdout: output } = require('process');
 
 const Spinner = require('./loadingSpinner');
 const typografText = require('./typograf');
-const TARGET_LANGUAGES  = require("./constants");
+const {TARGET_LANGUAGES}  = require("./constants");
 
 const file = require('../source/dirty.json');
 
-const spinner = new Spinner();
+// const spinner = new Spinner();
 const rl = readline.createInterface({ input, output });
 
 const key = process.env.TOKEN;
@@ -44,11 +44,11 @@ const typografy = async (arrayText) => {
 
 const showSpinner = () => {
     console.clear();
-    spinner.spin();
+    // spinner.spin();
 }
 
 const stopSpinner = () => {
-    spinner.stop();
+    // spinner.stop();
 }
 
 rl.question("Source Language? (default: 'ru')", async (lang) => {
@@ -61,15 +61,15 @@ rl.question("Source Language? (default: 'ru')", async (lang) => {
         const currentLanguage = TARGET_LANGUAGES[i];
         body.targetLanguageCode = currentLanguage;
 
-        spinner.changeText('Translate for ' + currentLanguage);
+        // spinner.changeText('Translate for ' + currentLanguage);
         const translation = await translate(body);
         allTranslations.push({[currentLanguage]: translation.data.translations.map(item => item.text)});
     }
 
-    spinner.changeText('Typografy all text');
+    // spinner.changeText('Typografy all text');
     // call typorafy for all translated languages
     const typografyArray = await typografy(allTranslations);
-
+    // const typografyArray = allTranslations;
     typografyArray.forEach(item => {
         const currentLanguage = Object.keys(item)[0];
 
@@ -80,7 +80,7 @@ rl.question("Source Language? (default: 'ru')", async (lang) => {
         fs.writeFileSync(`./result/result_${currentLanguage}.json`, JSON.stringify(newTranslation), 'utf-8');
     })
 
-    stopSpinner();
+    // stopSpinner();
 
     rl.close();
 })

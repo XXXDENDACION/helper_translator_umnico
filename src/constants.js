@@ -1,9 +1,17 @@
 const TARGET_LANGUAGES = [
     "ru",
-    "en",
-    "es",
-    "de",
-    "pt"
+    // "en",
+    // "es",
+    // "de",
+    // "pt"
 ];
 
-module.exports = TARGET_LANGUAGES;
+const LANG_TYPOGRAFY = [
+    "ru",
+    "en"
+]
+
+module.exports = {
+    TARGET_LANGUAGES,
+    LANG_TYPOGRAFY
+};
